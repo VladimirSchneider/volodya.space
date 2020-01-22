@@ -4,8 +4,8 @@
   "description": "Base Frontend Boilerplate",
   "main": "src/index.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./configs/webpack.config.dev.babel.js",
-    "start:prod": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.prod.babel.js",
+    "build:dev-server": "cross-env NODE_ENV=development webpack-dev-server --config ./configs/webpack.config.dev.babel.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.prod.babel.js",
     "flow": "flow"
   },
   "repository": {
