@@ -9,7 +9,10 @@ export default {
   entry: './src/index.js',
 
   output: {
-    path: path.resolve(__dirname, '..', 'dist')
+    path: path.resolve(__dirname, '..', 'dist'),
+    filename: 'static/js/bundle.js',
+    chunkFilename: 'static/js/[name].chunk.js',
+    globalObject: 'this',
   },
 
   module: {
@@ -37,7 +40,7 @@ export default {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../',
+              publicPath: '../../',
             },
           },
           'css-loader',
@@ -50,8 +53,8 @@ export default {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'img'
+              name: '[name].[hash:8].[ext]',
+              outputPath: 'static/media'
             }
           },
         ]
@@ -62,8 +65,8 @@ export default {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts'
+              name: '[name].[hash:8].[ext]',
+              outputPath: 'static/fonts/'
             }
           },
         ]
@@ -78,8 +81,8 @@ export default {
     }]),
 
     new MiniCssExtractPlugin({
-      filename: 'css/style.css',
-      chunkFilename: '[id].css',
+      filename: 'static/css/[name].[contenthash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
 
     new HtmlWebpackPlugin({
@@ -89,8 +92,6 @@ export default {
 
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production'
-    }),
-
-    new webpack.NamedModulesPlugin()
+    })
   ]
 };
