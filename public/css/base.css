@@ -31,3 +31,21 @@ body {
   font-size: 0.625em;
   color: inherit
 }
+
+@keyframes heartBounse {
+  from {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.greating__heart {
+  animation: heartBounse 1.2s ease-in-out 1s infinite forwards;
+}

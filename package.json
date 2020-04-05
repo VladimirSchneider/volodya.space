@@ -54,6 +54,10 @@
   },
   "dependencies": {
     "improve.css": "^1.0.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "workbox-cacheable-response": "^5.1.2",
+    "workbox-routing": "^5.1.2",
+    "workbox-strategies": "^5.1.2",
+    "workbox-sw": "^5.1.2"
   }
 }
