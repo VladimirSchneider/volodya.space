@@ -49,3 +49,13 @@ body {
 .greating__heart {
   animation: heartBounse 1.2s ease-in-out 1s infinite forwards;
 }
+
+.greating__price {
+  font-weight: 700;
+  color: rgb(255, 208, 0);
+}
+
+.greating__price i {
+  font-size: 0.625em;
+  font-style: normal;
+}
