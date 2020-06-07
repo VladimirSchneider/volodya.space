@@ -144,9 +144,12 @@ body {
   color: var(--color-yellow);
 }
 
+.project-link a {
+  margin-bottom: 1.11em;
+}
+
 a {
   display: inline-block;
-  margin-bottom: 1.11em;
 
   color: var(--color-blue);
   text-decoration: none;
@@ -163,4 +166,8 @@ article {
 
 article:last-child {
   margin-bottom: 0;
+}
+
+.page-footer {
+  margin-top: 2.5em;
 }
