@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-  max-width: 42em;
+  max-width: 40.5em;
   margin-right: auto;
   margin-left: auto;
   padding-right: 1.25em;
@@ -34,17 +34,9 @@ body {
   }
 }
 
-.page-header, .section {
-  margin-bottom: 2.5em;
-}
-
-.section:last-child {
-  margin-bottom: 0;
-}
-
 .border {
   margin-bottom: 2.5em;
-  padding: 2.5em;
+  padding: 2.2em;
   border: 0.25em solid var(--color-yellow);
 }
 
@@ -70,15 +62,23 @@ body {
   margin-bottom: 0;
 }
 
+.page-header, .section {
+  margin-bottom: 2.2em;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
 .section h2 {
   margin-left: 1.67em;
-  margin-bottom: 1.25em;
+  margin-bottom: 0.55em;
 
   font-size: 1.5em;
 }
 
 .section p {
-  font-size: 1.125em;
+  font-size: 1.4em;
 }
 
 .border--page-header {
@@ -140,8 +140,10 @@ body {
 }
 
 .more {
+  margin-top: 0.3em;
+
   text-align: center;
-  color: var(--color-yellow);
+  color: var(--color-grey);
 }
 
 .project-link a {
