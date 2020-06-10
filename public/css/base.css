@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-  max-width: 42em;
+  max-width: 40.7em;
   margin-right: auto;
   margin-left: auto;
   padding-right: 1.25em;
@@ -72,7 +72,7 @@ body {
 
 .section h2 {
   margin-left: 1.67em;
-  margin-bottom: 0.55em;
+  margin-bottom: 0.84em;
 
   font-size: 1.5em;
 }
@@ -127,23 +127,23 @@ body {
   font-size: 1.125em;
 }
 
-.skill-list {
+.section--skills p {
+  font-size: 1.5em;
+}
+
+.skill-list[class] {
   display: flex;
   flex-wrap: wrap;
-  font-size: 1.125em;
-  margin-bottom: 0.625em;
+  font-size: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+
+  color: var(--color-yellow);
 }
 
 .skill-list li {
-  margin-right: 1.11em;
-  margin-bottom: 1.11em;
-}
-
-.more {
-  margin-top: 0.3em;
-
-  text-align: center;
-  color: var(--color-grey);
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .project-link a {
@@ -172,4 +172,26 @@ article:last-child {
 
 .page-footer {
   margin-top: 2.5em;
+}
+
+.page-footer .border {
+  position: relative;
+}
+
+.page-footer .border .page-footer__icons {
+  position: absolute;
+  right: 2.2em;
+  top: 50%;
+
+  display: flex;
+  margin-top: -1.25em;
+}
+
+.page-footer .border .page-footer__icons a {
+  margin-left: 1.25em;
+}
+
+.page-footer .border .page-footer__icons svg {
+  width: 2.5em;
+  height: 2.5em;
 }
