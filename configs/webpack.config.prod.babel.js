@@ -1,16 +1,11 @@
-import webpack from 'webpack';
-import merge from 'webpack-merge';
-import baseConfig from './webpack.config.base';
-
-import TerserPlugin from 'terser-webpack-plugin';
+import TerserJsPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
-export default merge.smart(baseConfig, {
-  output: {
-    filename: 'static/js/[name].[contenthash:8].js',
-    chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
-  },
+import {merge} from 'webpack-merge';
 
+import baseConfig  from './webpack.config.base.js';
+
+export default merge(baseConfig, {
   devtool: 'source-map',
 
   mode: 'production',
@@ -25,14 +20,16 @@ export default merge.smart(baseConfig, {
             options: {
               mozjpeg: {
                 progressive: true,
-                quality: 90
               },
               optipng: {
                 enabled: false,
               },
               pngquant: {
-                speed: 11,
-                quality: '90-100',
+                quality: [0.65, 0.90],
+                speed: 4
+              },
+              webp: {
+                quality: 75
               }
             }
           }
@@ -41,39 +38,20 @@ export default merge.smart(baseConfig, {
     ]
   },
 
-  plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production'
-    })
-  ],
-
   optimization: {
     minimizer: [
-      new TerserPlugin({
+      new TerserJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
         terserOptions: {
-          parse: {
-            ecma: 8,
-          },
-          compress: {
-            ecma: 5,
-            warnings: false,
-            comparisons: false,
-            inline: 2,
-          },
-          mangle: {
-            safari10: true,
-          },
           output: {
-            ecma: 5,
             comments: false,
-            ascii_only: true,
           },
-        }
+        },
+        extractComments: false,
       }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
-    splitChunks: {
-      chunks: 'all',
-    },
+      new OptimizeCSSAssetsPlugin({})
+    ]
   }
 });

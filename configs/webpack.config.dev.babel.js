@@ -1,15 +1,9 @@
-import webpack from 'webpack';
-import merge from 'webpack-merge';
-import baseConfig from './webpack.config.base';
+import {merge} from 'webpack-merge';
 
-export default merge.smart(baseConfig, {
+import baseConfig  from './webpack.config.base.js';
+
+export default merge(baseConfig, {
   devtool: 'cheap-module-source-map',
 
-  mode: 'development',
-
-  plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development'
-    })
-  ]
+  mode: 'development'
 });

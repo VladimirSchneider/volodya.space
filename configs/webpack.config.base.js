@@ -1,9 +1,12 @@
 import path from 'path';
-import webpack from 'webpack';
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
+
+import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
+import postcssPresetEnv from 'postcss-preset-env';
+import postcssNormalize from 'postcss-normalize';
 
 export default {
   entry: './src/index.js',
@@ -11,8 +14,11 @@ export default {
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
     filename: 'static/js/bundle.js',
-    chunkFilename: 'static/js/[name].chunk.js',
-    globalObject: 'this',
+    publicPath: '/'
+  },
+
+  resolve: {
+    extensions: ['.js', '.css', '.png']
   },
 
   module: {
@@ -24,15 +30,7 @@ export default {
       },
       {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'html-srcsets-loader',
-            options: {
-              interpolate: true,
-              attrs: ['img:src', ':srcset']
-            }
-          }
-        ]
+        loader: 'html-loader'
       },
       {
         test: /\.css$/,
@@ -40,58 +38,74 @@ export default {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../../',
-            },
+              publicPath: 'static/css'
+            }
           },
-          'css-loader',
-          'postcss-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 3
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  postcssFlexbugsFixes,
+                  postcssPresetEnv({
+                    autoprefixer: {
+                      flexbox: 'no-2009',
+                    },
+                    stage: 3,
+                  }),
+                  postcssNormalize
+                ]
+              }
+            }
+          },
+          'resolve-url-loader'
         ]
       },
       {
         test: /\.(jpg|png|svg|webp)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[hash:8].[ext]',
-              outputPath: 'static/media'
-            }
-          },
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/media/[hash][ext][query]'
+        }
       },
       {
         test: /\.woff?/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[hash:8].[ext]',
-              outputPath: 'static/fonts/'
-            }
-          },
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/fonts/[hash][ext][query]'
+        }
       }
     ]
   },
 
   plugins: [
-    new CopyWebpackPlugin([{
-      from: './public/assets',
-      to: './',
-    }]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '..', 'public/assets'),
+          to: path.resolve(__dirname, '..', 'dist')
+        }
+      ]
+    }),
 
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
 
-    new HtmlWebpackPlugin({
+    new HtmlPlugin({
       template: './public/index.html',
       filename: 'index.html',
-    }),
-
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production'
     })
-  ]
+  ],
+
+  experiments: {
+    asset: true
+  }
 };
