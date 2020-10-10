@@ -29,12 +29,24 @@ body {
   background-color: hsl(0, 0%, 0%)
 }
 
-h1, h2, p {
-  margin-top: 0;
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed
 }
 
-p:last-child {
-  margin-bottom: 0;
+blockquote, body, dd, dl, figcaption, figure, h1, h2, h3, h4, li, ol[class], p, ul[class] {
+  margin: 0;
+}
+
+ol[class],ul[class] {
+ padding: 0;
+ list-style-type: none
+}
+
+button,input,select,textarea {
+  font: inherit
 }
 
 .container {
@@ -155,11 +167,8 @@ p:last-child {
   font-size: 1.5em;
   margin-top: 1.5em;
   margin-bottom: 1em;
-  padding-left: 0;
 
   color: var(--color-yellow);
-
-  list-style-type: none;
 }
 
 .skill-list li {
