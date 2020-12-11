@@ -1,5 +1,11 @@
-export default class App {
-  constructor() {
-    console.log('On github https://github.com/vladimirschneider/volodya.space');
+export default () => {
+  console.log('On github https://github.com/vladimirschneider/volodya.space');
+
+  const avatar = document.querySelector('.avatar');
+
+  if (avatar) {
+    avatar.addEventListener('click', () => {
+      alert('High five, dude!');
+    });
   }
 };

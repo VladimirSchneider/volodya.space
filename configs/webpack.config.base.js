@@ -1,8 +1,8 @@
 import path from 'path';
 
-import HtmlPlugin from 'html-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import postcssPresetEnv from 'postcss-preset-env';
@@ -13,12 +13,7 @@ export default {
 
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
-    filename: 'static/js/bundle.js',
-    publicPath: '/'
-  },
-
-  resolve: {
-    extensions: ['.js', '.css', '.png']
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
 
   module: {
@@ -28,17 +23,19 @@ export default {
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
+
       {
-        test: /\.html$/,
+        test: /\.html$/i,
         loader: 'html-loader'
       },
+
       {
         test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: 'static/css'
+              publicPath: '/'
             }
           },
           {
@@ -52,28 +49,29 @@ export default {
             options: {
               postcssOptions: {
                 plugins: [
-                  postcssFlexbugsFixes,
-                  postcssPresetEnv({
+                  postcssFlexbugsFixes(),
+                  postcssPresetEnv( {
                     autoprefixer: {
-                      flexbox: 'no-2009',
+                      flexbox: 'no-2009'
                     },
-                    stage: 3,
-                  }),
+                    stage: 3
+                  } ),
                   postcssNormalize
                 ]
               }
             }
-          },
-          'resolve-url-loader'
+          }
         ]
       },
+
       {
         test: /\.(jpg|png|svg|webp)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'static/media/[hash][ext][query]'
+          filename: 'static/images/[name][ext][query]'
         }
       },
+
       {
         test: /\.woff?/,
         type: 'asset/resource',
@@ -85,7 +83,7 @@ export default {
   },
 
   plugins: [
-    new CopyPlugin({
+    new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, '..', 'public/assets'),
@@ -99,7 +97,7 @@ export default {
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
 
-    new HtmlPlugin({
+    new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
     })

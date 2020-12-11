@@ -158,7 +158,17 @@ button,input,select,textarea {
 }
 
 .section--skills p {
+  margin-bottom: 1rem;
+
   font-size: 1.5em;
+}
+
+.section--skills p:last-child {
+  margin-bottom: 0;
+}
+
+.section--skills .skill-list {
+  margin-bottom: 1rem;
 }
 
 .skill-list {
@@ -177,7 +187,7 @@ button,input,select,textarea {
 }
 
 .project-link a {
-  margin-bottom: 1.11em;
+  margin-bottom: 0.5em;
 }
 
 a {
