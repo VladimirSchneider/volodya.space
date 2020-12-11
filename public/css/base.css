@@ -221,6 +221,20 @@ article:last-child {
   margin-left: 1.25em;
 }
 
+.page-footer .border .page-footer__icons a:first-child {
+  margin-left: 0;
+}
+
+.page-footer .border .page-footer__icons .github-link {
+  fill: white;
+}
+
+.page-footer .border .page-footer__icons .github-link:hover {
+  border-bottom: transparent;
+
+  opacity: 0.6;
+}
+
 .page-footer .border .page-footer__icons svg {
   width: 2.5em;
   height: 2.5em;
