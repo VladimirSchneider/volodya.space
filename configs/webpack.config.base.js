@@ -100,7 +100,17 @@ export default {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
-    })
+    }),
+
+    new HtmlWebpackPlugin({
+      template: './public/apps/spaceship-arcade/index.html',
+      filename: 'apps/spaceship-arcade/index.html',
+    }),
+
+    new HtmlWebpackPlugin({
+      template: './public/apps/spaceship-arcade/privacy-policy.html',
+      filename: 'apps/spaceship-arcade/privacy-policy.html',
+    }),
   ],
 
   experiments: {
